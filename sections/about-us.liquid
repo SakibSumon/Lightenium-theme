@@ -1,0 +1,75 @@
+{{ 'about-us.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .about-us{
+        margin-bottom: {{ section.settings.abt_us_margin_bottom }}px;
+    }
+</style>
+
+<section class="about-us section-margin">
+    <div class="abt-us-overlay" >&nbsp;</div>
+    <div class="abt-us-contnt page-width">
+        <div class="abt-fst-div">
+            {% render 'image', imageSrc: section.settings.abt_lft_img, classes: 'abt-lft-img' %}
+        </div>
+        <div class="abt-us-div">
+            <div class="abt-rght-cntnt">
+                <h2 class="about-us-title section-title"> {{ section.settings.abt_rght_title }} </h2>
+                <p class="abt-rght-txt">{{ section.settings.abt_rght_txt }}</p>
+                <a class="btn hero-btn abt-btn" href="{{ section.settings.abt_us_url }}"> View Details </a>
+                <div class="abt-rght-imgArea">
+                    {% render 'image', imageSrc: section.settings.abt_rght_img, classes: 'abt-rght-img' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+    {
+        "name": "About Us",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "abt_lft_img",
+                "label": "About Left Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "abt_rght_img",
+                "label": "About Right Image"
+            },
+            {
+                "type": "text",
+                "id": "abt_rght_title",
+                "label": "About Right Title"
+            },
+            {
+                "type": "text",
+                "id": "abt_rght_txt",
+                "label": "Section Title"
+            },
+            {
+                "type": "text",
+                "id": "abt_us_url",
+                "label": "Button URL"
+            },
+            {
+                "type": "range",
+                "id": "abt_us_margin_bottom",
+                "label": "Margin Bottom",
+                "min": 0,
+                "max": 200,
+                "step": 5,
+                "default": 160
+            }
+        ],
+        "presets": [
+            {
+                "name": "About Us"
+            }
+        ]
+    }
+{% endschema %}
+

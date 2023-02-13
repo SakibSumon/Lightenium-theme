@@ -1,0 +1,104 @@
+{{ 'new-blog.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .secnd-div{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+</style>
+
+
+<section class="new-blog">
+    <h2 class="section-title"> {{ section.settings.new_blg_title }} </h2>
+    <div class="blg-container page-width">
+        <div class="first-div">
+            <div class="blog-div">
+                 <a class="blg-anchor-wrap" href="{{ section.settings.left_article.url }}"> &nbsp; </a>
+                <div class="new-blog-imgArea">
+                    {% render 'image', imageSrc: section.settings.left_article.image, classes: 'blg-lft-img' %}
+                </div>
+                <div class="new-blog-text">
+                    <h3 class="blg-title">{{ section.settings.left_article.title }}</h3>
+                    <p class="blg-content">{{ section.settings.left_article.content | strip_html | truncatewords: 10 }}</p>
+                    <a class="blg-btn" href="{{ section.settings.left_article.url }}">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="secnd-blg-div">
+            {% for item in section.blocks %}
+                <div class="sec-blog-item">
+                     <a class="blg-anchor-wrap" href="{{ section.settings.left_article.url }}"> &nbsp; </a>
+                    <div class="sec-blog-imgArea">
+                        {% render 'image', imageSrc: item.settings.blog.image, classes: 'blg-lft-img' %}
+                    </div>
+                    <div class="new-blog-text">
+                        <h3 class="blg-title">{{ item.settings.blog.title }}</h3>
+                        <p class="blg-content"> {{ item.settings.blog.content | strip_html | truncatewords: 7 }}</p>
+                        <a class="blg-btn" href="{{ item.settings.blog.url }}">Read More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="sml-screen page-width">
+    <div class="sml-blg">
+        {% for item in section.blocks %}
+            <div class="sml-blg-item">
+                <a class="blg-anchor-wrap" href="{{ section.settings.left_article.url }}"> &nbsp; </a>
+                <div class="sml-blg-imgArea">
+                    {% comment %} <img src="{{ item.settings.blog.image | img_url: 'large' }}" alt=""> {% endcomment %}
+                    {% render 'image', imageSrc: item.settings.blog.image, classes: 'blg-lft-img' %}
+                </div>
+                <div class="sml-blg-text">
+                    <h3 class="blg-title">{{ item.settings.blog.title }}</h3>
+                    <p class="blg-content">{{ item.settings.blog.content | strip_html | truncatewords: 7 }}</p>
+                    <a class="blg-btn" href="{{ item.settings.blog.url }}">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+</section>
+
+{% schema %}
+    {
+        "name": "new-blog",
+        "settings": [
+            {
+                "type": "text",
+                "id": "new_blg_title",
+                "label": "Section Title"
+            },
+            {
+                "type": "article",
+                "id": "left_article",
+                "label": "Select a blog"
+            }
+        ],
+        "max_blocks": 3,
+        "blocks": [
+            {
+                "type": "text",
+                 "name": "New Blog",
+                "settings": [
+
+                    {
+                        "type": "article",
+                        "id": "blog",
+                        "label": "Select a blog"   
+
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "New Blog"
+            }
+        ]
+    }
+{% endschema %}

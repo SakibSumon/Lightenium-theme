@@ -1,0 +1,66 @@
+{{ 'discount.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .mt-200{
+        margin-top: {{ section.settings.mt_200 }}px;
+    }
+</style>
+
+<section class="dscnt section-margin"  >
+    <div class="div-overlay dis-overlay"> &nbsp; </div>
+    {% render 'image', imageSrc: section.settings.dscnt_img, classes: 'dscnt-img' %}
+    <div class="dscnt-cntnt">
+        <h2 class="section-title dscnt-title"> {{ section.settings.dscnt_title }} </h2> 
+        <p class="dscnt-txt"> {{ section.settings.dscnt_txt }} </p> 
+        <a class="btn hero-btn"  href="{{ section.settings.dscnt_btn }}"> View More </a>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Discount",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "dscnt_img",
+                "label": "Background Image"
+            },
+            {
+                "type": "text",
+                "id": "dscnt_title",
+                "label": "Title",
+                "info": "Title"
+            },
+            {
+                "type": "text",
+                "id": "dscnt_txt",
+                "label": "Text",
+                "info": "Text"
+            },
+            {
+                "type": "url",
+                "id": "dscnt_btn",
+                "label": "Button URL"
+            },
+            {   
+                "type": "header",
+                "content": "Margin"
+            },
+            {
+                "type": "range",
+                "id": "mt_200",
+                "label": "Margin Top",
+                "min": 0,
+                "max": 200,
+                "step": 20,
+                "default": 160
+            }
+        ],
+
+        "presets": [
+            {
+                "name": "Discount"
+            }
+        ]
+    }
+{% endschema %}

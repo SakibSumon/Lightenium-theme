@@ -1,0 +1,136 @@
+{{ 'new-footer.css' | asset_url | stylesheet_tag }}
+
+
+<section class="new-footer">
+
+    <div class="ft-wrapper">
+        <div class="ft-div ft-lft">
+            {% comment %} <h2 class="footer-title"> {{ section.settings.ft_title }}</h2> {% endcomment %}
+            
+            <div class="ft-logoArea">
+                {% render 'image', imageSrc: section.settings.ft_logo.image, classes: 'ft-logo' %}
+            </div>
+
+            <div class="ft-links">
+            
+                <ul  class="footer-link">
+                    <div class="footer__content-top ">
+                        {%- if section.blocks.size > 0 -%}
+                            {%- liquid
+                            if section.blocks.size == 9
+                                assign footer_grid_class = 'grid--3-col-tablet'
+                            elsif section.blocks.size > 6
+                                assign footer_grid_class = 'grid--4-col-desktop'
+                            elsif section.blocks.size > 4
+                                assign footer_grid_class = 'grid--3-col-tablet'
+                            elsif section.blocks.size == 2
+                                assign footer_grid_class = 'col-3-grid'
+                            endif
+                            -%}
+                            <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
+                            {%- for block in section.blocks -%}
+                                {%- if block.settings.footer1 != blank -%}
+                                <ul class="footer-block__details-content list-unstyled">
+                                    <p class="footer-title"> {{ block.settings.footer_title }} </p>
+                                    {%- for link in block.settings.footer1.links -%}
+                                        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: block.settings.footer1, variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+                                    <li>
+                                        <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                                        {{ link.title }}
+                                        </a>
+                                    </li>
+                                    {%- endfor -%}
+                                </ul>
+                                {%- endif -%}
+                            {% endfor %}
+
+                                <ul class="ft-contact footer-block__details-content list-unstyled">
+                                    <p class="footer-title">Our Story</p>
+                                    <li> <p> 
+                                        45 Marine Parade<br> 
+                                        Coolangatta QLD 42
+                                    </p> </li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </ul>
+                <p class="ft-bot-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ducimus alias sit architecto dignissimos, accusantium autem voluptatum nisi error non deleniti natus quasi doloremque ipsa? Accusamus quidem iste vero eos!</p>
+            </div>
+
+        </div>
+        <div class="ft-div ft-rght">
+            <div class="ft-imaArea">
+                    {% render 'image', imageSrc: section.settings.ft_image, classes: 'ft-img' %}
+            </div>
+            <p class="ft-par">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est amet accusantium repellat optio fugiat omnis maxime minima repellendus vel facilis rem magnam, esse veritatis iure, unde impedit ex nesciunt soluta.</p>
+        </div>
+
+        <hr class="ft-hr">
+    </div>
+    
+    
+
+</section>
+
+{% schema %}
+    {
+        "name": "Footer",
+        "settings": [
+            {
+                "type": "text",
+                "id": "ft_title",
+                "label": "Footer Title",
+                "default": "Footer"
+            },
+            {
+                "type": "text",
+                "id": "footer_top_email",
+                "label": "Footer Top Email"
+            },
+            {   
+                "type": "image_picker",
+                "id": "ft_image",
+                "label": "Footer Image"
+            },
+            {   
+                "type": "image_picker",
+                "id": "ft_logo",
+                "label": "Footer Logo"
+            }
+        ],
+        "blocks": [
+            {
+               "type": "link_list",
+                "name": "t:sections.footer.blocks.link_list.name",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "heading",
+                        "default": "Quick links",
+                        "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "footer1",
+                        "default": "footer",
+                        "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+                        "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+                    },
+                    {
+                        "type": "text",
+                        "id": "footer_title",
+                        "label": "Footer Title"
+                    }
+                ]
+            }
+        ],
+
+        "presets": [
+            {
+                "name": "New Footer"
+            }
+        ]
+    }
+{% endschema %}

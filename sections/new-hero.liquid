@@ -1,0 +1,90 @@
+{{ 'new-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="hero">
+    
+  <div class="main-carousel" data-speed=".35">
+    {% for item in section.blocks %}
+        <div class="carousel-cell" >
+            <div class="overlay"> &nbsp; </div>
+            {% if item.settings.banner_img != null %}
+                    {% render 'image', imageSrc: item.settings.banner_img, classes: 'banner-img' %}
+                {% else %}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'banner-img' }}
+            {% endif %}
+                    
+            <div class="hero-content">
+                <h2 class="hero-title">{{ item.settings.hero_title }}</h2>
+                <p class="hero-subtitle">  {{ item.settings.hero_subtitle }} </p>
+                <a class="btn hero-btn" href=" {{ item.settings.hero_button_link }} "> {{ item.settings.hero_button_text }} </a>
+            </div>
+        </div>
+    {% endfor %}
+  </div>
+  
+</section>
+
+
+<script>
+
+ var flkty = new Flickity('.main-carousel', {
+   prevNextButtons: false,
+});
+
+flkty.resize();
+
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "Hero",
+    "blocks": [
+    {
+        "type": "hero_images",
+        "name": "Slider Item",
+            "settings": [
+
+            {
+                "type": "image_picker",
+                "id": "banner_img",
+                "label": "Choose Banner Image"
+            },
+
+            {
+                "type": "text",
+                "id": "hero_title",
+                "label": "Hero Title",
+                "default": "Summer Vibes."
+            },
+
+            {
+                "type": "text",
+                "id": "hero_subtitle",
+                "label": "Hero Subtitle",
+                "default": "Decorate your house"
+            },
+            {
+                "type": "text",
+                "id": "hero_button_text",
+                "label": "Button 1 Text",
+                "default": "Contact Us"
+            },
+            {
+            "type": "url",
+            "id": "hero_button_link",
+            "label": "Button 1 URL",
+            "default": "/"
+            }
+        ]
+    }
+  ],
+
+  "presets": [
+    {
+        "name":"New Hero"
+    }
+  ]
+  }
+{% endschema %}

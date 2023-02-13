@@ -1,0 +1,49 @@
+{% if widthBreakPoints %}
+  {%- assign widthBreak = widthBreakPoints | split: ',' -%}
+{% else %}
+  {%- assign widthBreak =
+    '180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2808,3024' | split: ',' -%}
+{% endif %}
+<img data-original="{{ imageSrc | img_url: 'master' }}" id="{{ imageID }}" class="{{ classes }} lazyload" {% if isAsset %} {% if firstLoadWidth %}src="{{ imageSrc | asset_img_url: firstLoadWidth }}" {% else %}src="{{ imageSrc | asset_img_url: '100x' }}" {% endif %} data-srcset="{% for width in widthBreak %}
+  
+  
+              {% capture srcUrl %}{{ imageSrc | asset_img_url: '1x1' }} {{ width }}w{% endcapture %}
+  
+  
+              {% assign requestedSize = width | append: 'x' %}{{  srcUrl | replace: '1x1', requestedSize }}
+  
+  
+              {% if forloop.last != true %},{% endif %}
+  
+  
+            {% endfor %}" alt="{{ altTag }}" {% else %} {% if firstLoadWidth %}src="{{ imageSrc | img_url: firstLoadWidth }}"
+  {% else %}src="{{ imageSrc | img_url: '100x' }}" {% endif %} data-srcset="{% for width in widthBreak %}
+    
+    
+                  {% capture srcUrl %}{{ imageSrc | img_url: '1x1' }} {{ width }}w{% endcapture %}
+    
+    
+                  {% assign requestedSize = width | append: 'x' %}{{  srcUrl | replace: '1x1', requestedSize }}
+    
+    
+                  {% if forloop.last != true %},{% endif %}
+    
+    
+                {% endfor %}" alt="{% if imageSrc.alt != blank %}{{ imageSrc.alt }}{% else %}{{ altTag }}{% endif %}" {% endif %}
+  data-sizes="auto" {{ imageAttributes }}>
+
+{% if isAsset %}
+
+
+  <noscript>
+    <img data-original="{{ imageSrc | img_url: 'master' }}" id="{{ imageID }}" class="{{ classes }} lazyloaded" src="{{ imageSrc | asset_img_url: '1440x' }}" alt="{{ altTag }}">
+  </noscript>
+
+{% else %}
+
+  <noscript>
+    <img data-original="{{ imageSrc | img_url: 'master' }}" id="{{ imageID }}" class="{{ classes }} lazyloaded" src="{{ imageSrc | img_url: '1440x' }}" alt="{% if imageSrc.alt  != blank %}{{ imageSrc.alt }}{% else %}{{ altTag }}{% endif %}">
+  </noscript>
+
+
+{% endif %}

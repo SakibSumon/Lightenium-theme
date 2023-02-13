@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+:root {
+    --primary-color: #E4E1D5;
+    --background-color: #F0F0F0;
+    --primary-font: 'Josefin Sans', sans-serif;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, span{
+    font-family: var(--primary-font) !important;
+}
+
+::selection{
+    background-color: black;
+    color: white;
+}
+
+.btn{
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: black;
+}
+
+.section-margin{
+    margin: 100px 0;
+}
+
+.section-title{
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.div-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.prod-mnth-title{
+    margin-bottom: 48px;
+}
+
+.shopify-payment-button__button{
+    background-color: #4E4534 !important;
+}
+
+.product-form__input input[type='radio']:checked + label{
+    outline: .05rem solid black !important;
+}
+ 
+
+.new-mm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: auto !important;
+    gap: 18px;
+    padding-left: 2.4rem !important;
+    padding-right: 2.4rem !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    height: auto;
+    position: absolute;
+    left: 0;
+} 
+
+.mm-submenu{
+    background-color: transparent !important;
+}
+
+.mm-sub-parent{
+    position: static !important;
+}
+
+.header__submenu .header__submenu .header__menu-item{
+    padding: 0.8rem 2.4rem;
+}
+
+.mm-imgArea{
+    display: flex;
+    gap: 20px;
+    max-height: 276px;
+    max-width: 600px;
+}
+
+.mm-image{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+.header__menu-item{
+    font-size: 16px;
+}
+
+
+/* media query for 480px */
+@media screen and (max-width: 720px){
+    .section-title{
+        font-size: 24px;
+    }
+}

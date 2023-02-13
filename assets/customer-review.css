@@ -1,0 +1,72 @@
+.customer-review{
+    min-height: 300px;
+    background-color: var(--background-color) ;
+}
+
+.rev-cell{
+    min-height: 300px;
+}
+
+.rev-cell-item{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 42px;
+    min-height: 300px;
+    padding: 0 100px;
+    padding-bottom: 60px;
+}
+
+.rev-img-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    
+}
+
+.rev-imgArea{
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: 84%;
+    border-radius: 8px;
+}
+
+.rev-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.customer-review .flickity-page-dots{
+    bottom: -74px;
+}
+
+.rev-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.customer-review .flickity-prev-next-button .flickity-button-icon{
+    width: 44%;
+}
+
+.customer-review .flickity-button{
+    background-color: transparent;
+}
+
+.flickity-page-dots{
+    display: none;
+}
+
+.rev-author{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}

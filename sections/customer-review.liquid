@@ -1,0 +1,82 @@
+{{ 'customer-review.css' | asset_url | stylesheet_tag }}
+
+<section class="customer-review section-margin">\
+    <h2 class="section-title"> {{ section.settings.cus_rev_title }} </h2>
+    <div class="rev-cell  page-width">
+        {% for block in section.blocks %}
+            <div class="rev-cell-item">
+                <div class="rev-img-div">
+                    <div class="rev-imgArea">
+                        {% render 'image', imageSrc: block.settings.image_1, classes: 'rev-img' %}
+                    </div>
+                    <div class="rev-imgArea">
+                        {% render 'image', imageSrc: block.settings.image_2, classes: 'rev-img' %}
+                    </div>
+                </div>
+                    <div class="rev-content">
+                        <p class="cus-rev-txt">{{ block.settings.rev_text }}</p>
+                        <p class="rev-author"> {{ block.settings.rev_author }} </p>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<script>
+ let rev_cell = new Flickity( '.rev-cell', {
+        adaptiveHeight: true,
+        accessibility: false,
+    });
+
+</script>
+
+
+{% schema %}
+    {
+        "name": "Customer Review",
+        "settings": [
+            {
+                "type": "text",
+                "id": "cus_rev_title",
+                "label": "Title",
+                "default": "Customer Review"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Customer Review",
+                "type": "customer_review",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image_1",
+                        "label": "First Image"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image_2",
+                        "label": "Second Image"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "rev_text",
+                        "label": "Review Text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "rev_author",
+                        "label": "Author Name"
+                    }   
+                ]
+                        
+            }
+        
+        ],
+        "presets": [
+            {
+                "name": "Customer Review Slider"
+            }
+        ]
+    }
+{% endschema %}
